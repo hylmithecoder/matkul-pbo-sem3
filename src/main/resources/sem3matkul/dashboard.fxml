@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sem3matkul.dashboard.DashboardController"
+      styleClass="root" prefWidth="850.0" prefHeight="580.0">
+    <padding>
+        <Insets top="24.0" right="28.0" bottom="24.0" left="28.0"/>
+    </padding>
+
+    <!-- Header / Banner -->
+    <VBox spacing="6.0" styleClass="card" style="-fx-background-color: linear-gradient(to right, #eff6ff, #ffffff); -fx-border-color: #bfdbfe;">
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label text="🎓 Dashboard Praktikum PBO" styleClass="title-large" style="-fx-text-fill: #1e40af;"/>
+            <Label text="Semester 3" styleClass="badge-tag"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="🚪 Keluar" onAction="#handleKeluar" styleClass="btn, btn-secondary"/>
+        </HBox>
+        <Label text="Pusat navigasi materi perkuliahan &amp; tugas pemrograman berorientasi objek per-pertemuan."
+               styleClass="subtitle" style="-fx-text-fill: #3b82f6;"/>
+    </VBox>
+
+    <!-- Grid / Daftar Modul Pertemuan -->
+    <VBox spacing="12.0" VBox.vgrow="ALWAYS">
+        <Label text="📚 Daftar Modul &amp; Pertemuan Kuliah" styleClass="title-medium"/>
+
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+            <VBox spacing="14.0">
+                <!-- Pertemuan 1 Card -->
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="Pertemuan 1: Data &amp; Nilai Mahasiswa" styleClass="title-medium"/>
+                            <Label text="Aktif" styleClass="badge-active"/>
+                        </HBox>
+                        <Label text="Materi: Class, Objek, Enkapsulasi, Constructor, Getter/Setter, dan Perhitungan Nilai Akhir."
+                               styleClass="subtitle"/>
+                        <Label text="💡 Pengingat: Menghitung bobot 40% MID + 60% UAS &amp; Konversi Grade A/B/C/D/E."
+                               style="-fx-font-size: 11px; -fx-text-fill: #2563eb;"/>
+                    </VBox>
+                    <Button text="🚀 Buka Window" onAction="#handleBukaPertemuan1" styleClass="btn, btn-primary"/>
+                </HBox>
+
+                <!-- Pertemuan 2 Card -->
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="Pertemuan 2: Thread" styleClass="title-medium"/>
+                            <Label text="Aktif" styleClass="badge-active"/>
+                        </HBox>
+                        <Label text="Materi: Mempelajari Tentang Thread pada Java."
+                               styleClass="subtitle"/>
+                    </VBox>
+                    <Button text="🚀 Buka Window" onAction="#handleBukaPertemuan2" styleClass="btn, btn-primary"/>
+                </HBox>
+
+                <!-- Pertemuan 3 Card -->
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="Pertemuan 3: Abstract Class &amp; Interface" styleClass="title-medium"/>
+                            <Label text="Mendatang" styleClass="badge-upcoming"/>
+                        </HBox>
+                        <Label text="Materi: Kontrak Interface, Multiple Implementation, dan Abstraksi Sistem."
+                               styleClass="subtitle"/>
+                    </VBox>
+                    <Button text="📁 Buka Window" onAction="#handleBukaPertemuan3" styleClass="btn, btn-secondary"/>
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </VBox>
+
+    <!-- Footer Notes -->
+    <VBox spacing="4.0" styleClass="notes-box">
+        <Label text="💡 Tips Modularisasi:" styleClass="notes-title"/>
+        <Label text="Setiap materi baru dapat ditambahkan dalam package terpisah (contoh: 'sem3matkul.pertemuan2') lengkap dengan window dan FXML-nya sendiri."
+               styleClass="notes-text"/>
+    </VBox>
+</VBox>

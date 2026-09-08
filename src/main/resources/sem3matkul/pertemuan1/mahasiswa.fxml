@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="16.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sem3matkul.pertemuan1.controller.MahasiswaController"
+      styleClass="root" prefWidth="1020.0" prefHeight="680.0">
+    <padding>
+        <Insets top="20.0" right="24.0" bottom="20.0" left="24.0"/>
+    </padding>
+
+    <!-- Header Section -->
+    <HBox alignment="CENTER_LEFT" spacing="12.0">
+        <VBox HBox.hgrow="ALWAYS" spacing="4.0">
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <Label text="Pertemuan 1: Data &amp; Nilai Mahasiswa" styleClass="title-large"/>
+                <Label text="Semester 3" styleClass="badge-tag"/>
+                <Label text="PBO Dasar" styleClass="badge-active"/>
+            </HBox>
+            <Label text="Implementasi Class, Objek, Enkapsulasi, Constructor, dan Kalkulasi Nilai Akhir"
+                   styleClass="subtitle"/>
+        </VBox>
+    </HBox>
+
+    <!-- Main Content (Form on Left, Table on Right) -->
+    <HBox spacing="16.0" VBox.vgrow="ALWAYS">
+        <!-- Left: Input Form Card -->
+        <VBox spacing="14.0" styleClass="card" prefWidth="320.0" minWidth="300.0">
+            <Label text="📝 Form Input Mahasiswa" styleClass="title-medium"/>
+            <Separator/>
+
+            <VBox spacing="6.0">
+                <Label text="Nomor Induk Mahasiswa (NIM)" styleClass="label-bold"/>
+                <TextField fx:id="tfNim" promptText="contoh: 230001"/>
+            </VBox>
+
+            <VBox spacing="6.0">
+                <Label text="Nama Lengkap" styleClass="label-bold"/>
+                <TextField fx:id="tfNama" promptText="contoh: Muhammad Hylmi"/>
+            </VBox>
+
+            <HBox spacing="10.0">
+                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                    <Label text="Nilai MID (0-100)" styleClass="label-bold"/>
+                    <TextField fx:id="tfNilaiMid" promptText="contoh: 85"/>
+                </VBox>
+                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                    <Label text="Nilai UAS (0-100)" styleClass="label-bold"/>
+                    <TextField fx:id="tfNilaiUas" promptText="contoh: 90"/>
+                </VBox>
+            </HBox>
+
+            <Label fx:id="lblStatusMessage" wrapText="true" style="-fx-font-size: 11px;"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <HBox spacing="8.0">
+                <Button text="➕ Hitung &amp; Simpan" onAction="#handleTambah"
+                        styleClass="btn, btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button text="🔄 Reset" onAction="#handleResetForm"
+                        styleClass="btn, btn-secondary"/>
+            </HBox>
+        </VBox>
+
+        <!-- Right: Table & Stats Card -->
+        <VBox spacing="12.0" styleClass="card" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label text="📊 Daftar Nilai &amp; Hasil Evaluasi" styleClass="title-medium" HBox.hgrow="ALWAYS"/>
+                <Button text="🗑️ Hapus Baris" onAction="#handleHapus" styleClass="btn, btn-danger"/>
+            </HBox>
+
+            <!-- Table View -->
+            <TableView fx:id="tableMahasiswa" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colNim" text="NIM" minWidth="90.0" prefWidth="100.0"/>
+                    <TableColumn fx:id="colNama" text="Nama Mahasiswa" minWidth="160.0" prefWidth="200.0"/>
+                    <TableColumn fx:id="colNilaiMid" text="Nilai MID" minWidth="80.0" prefWidth="85.0"/>
+                    <TableColumn fx:id="colNilaiUas" text="Nilai UAS" minWidth="80.0" prefWidth="85.0"/>
+                    <TableColumn fx:id="colNilaiAkhir" text="Nilai Akhir" minWidth="90.0" prefWidth="100.0"/>
+                    <TableColumn fx:id="colGrade" text="Grade" minWidth="65.0" prefWidth="70.0"/>
+                    <TableColumn fx:id="colStatus" text="Status" minWidth="100.0" prefWidth="110.0"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+
+            <!-- Stats Bar -->
+            <HBox spacing="20.0" alignment="CENTER_LEFT"
+                  style="-fx-background-color: #f8fafc; -fx-padding: 10px 14px; -fx-background-radius: 8px; -fx-border-color: #e2e8f0; -fx-border-radius: 8px;">
+                <HBox spacing="6.0" alignment="CENTER_LEFT">
+                    <Label text="Total Mahasiswa:" styleClass="label-bold"/>
+                    <Label fx:id="lblTotalMahasiswa" text="0" style="-fx-font-weight: bold; -fx-text-fill: #2563eb;"/>
+                </HBox>
+                <Separator orientation="VERTICAL"/>
+                <HBox spacing="6.0" alignment="CENTER_LEFT">
+                    <Label text="Rata-rata Nilai:" styleClass="label-bold"/>
+                    <Label fx:id="lblRataRata" text="0.00" style="-fx-font-weight: bold; -fx-text-fill: #059669;"/>
+                </HBox>
+                <Separator orientation="VERTICAL"/>
+                <HBox spacing="6.0" alignment="CENTER_LEFT">
+                    <Label text="Persentase Lulus:" styleClass="label-bold"/>
+                    <Label fx:id="lblPersenLulus" text="0%" style="-fx-font-weight: bold; -fx-text-fill: #7c3aed;"/>
+                </HBox>
+            </HBox>
+        </VBox>
+    </HBox>
+
+    <!-- Bottom: Notes & Reminder Section -->
+    <VBox spacing="6.0" styleClass="notes-box">
+        <HBox alignment="CENTER_LEFT" spacing="6.0">
+            <Label text="💡 Pengingat Materi Pertemuan 1:" styleClass="notes-title"/>
+        </HBox>
+        <Label text="• Formula Nilai Akhir: (40% × Nilai MID) + (60% × Nilai UAS)." styleClass="notes-text"/>
+        <Label text="• Rentang Grade: A (≥ 80), B (≥ 70), C (≥ 60), D (≥ 50), E (&lt; 50). Status LULUS diperoleh jika grade A, B, atau C."
+               styleClass="notes-text"/>
+        <Label text="• Konsep PBO: Enkapsulasi data dengan atribut private pada class Mahasiswa dan metode mutator/accessor (Getter/Setter)."
+               styleClass="notes-text"/>
+    </VBox>
+</VBox>
