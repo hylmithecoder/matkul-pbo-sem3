@@ -61,13 +61,12 @@
                 <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
                     <VBox spacing="4.0" HBox.hgrow="ALWAYS">
                         <HBox alignment="CENTER_LEFT" spacing="8.0">
-                            <Label text="Pertemuan 3: Abstract Class &amp; Interface" styleClass="title-medium"/>
-                            <Label text="Mendatang" styleClass="badge-upcoming"/>
+                            <Label text="Pertemuan 3: Collection Lanjutan (Queue, Stack, Dequeue, HashSet)" styleClass="title-medium"/>
+                            <Label text="Aktif" styleClass="badge-active"/>
                         </HBox>
-                        <Label text="Materi: Kontrak Interface, Multiple Implementation, dan Abstraksi Sistem."
-                               styleClass="subtitle"/>
+                        <Label text="Materi: Berbagai jenis collection untuk menyimpan data." styleClass="subtitle"/>
                     </VBox>
-                    <Button text="📁 Buka Window" onAction="#handleBukaPertemuan3" styleClass="btn, btn-secondary"/>
+                    <Button text="📁 Buka Window" onAction="#handleBukaPertemuan3" styleClass="btn, btn-primary"/>
                 </HBox>
             </VBox>
         </ScrollPane>

@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import sem3matkul.core.WindowManager;
 import java.util.*;
 import java.io.IOException;
 import java.net.URL;
@@ -36,7 +37,13 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.setMinWidth(750);
         primaryStage.setMinHeight(500);
+
+        // Daftarkan dashboard stage ke WindowManager agar bisa disembunyikan saat modul dibuka
+        WindowManager.setDashboardStage(primaryStage);
+
+        primaryStage.setMaximized(true);
         primaryStage.show();
+        primaryStage.setMaximized(true);
     }
 
     public static void main(String[] args) {

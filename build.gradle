@@ -12,11 +12,12 @@ targetCompatibility = '17'
 
 javafx {
     version = '17.0.10'
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing' ]
 }
 
 dependencies {
     // Dependensi tambahan jika diperlukan
+    implementation 'org.apache.pdfbox:pdfbox:3.0.1'
 }
 
 application {
@@ -25,4 +26,9 @@ application {
 
 tasks.named('run') {
     standardInput = System.in
+}
+
+tasks.register('testPDF', JavaExec) {
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'sem3matkul.PDFRendererTest'
 }

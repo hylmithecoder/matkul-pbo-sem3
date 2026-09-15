@@ -5,6 +5,8 @@ package sem3matkul.pertemuan2.cli;
  * Di-run via CliManager ketika user memilih mode CLI (choice 1).
  * Menggunakan Thread & Runnable sesuai materi.
  */
+import sem3matkul.core.CliHelper;
+
 public class ThreadCli {
 
     /** Entry modular yang dipanggil CliManager - loop dengan prompt ulang */
@@ -15,25 +17,16 @@ public class ThreadCli {
     public static void run(java.util.Scanner scanner) {
         // Loop utama - reset dari 0 tiap iterasi
         while (true) {
-            System.out.println("\n=== PERTEMUAN 2: Thread (CLI Mode) ===");
+            CliHelper.print("\n=== PERTEMUAN 2: Thread (CLI Mode) ===");
             new Kasir();
 
-            System.out.println("\nIngin Mengulanginya lagi?");
-            System.out.println("1. Ya");
-            System.out.println("2. No");
+            CliHelper.print("\nIngin Mengulanginya lagi?");
+            CliHelper.print("1. Ya");
+            CliHelper.print("2. No");
             System.out.print("Pilih: ");
             System.out.flush();
 
-            int choice = -1;
-            if (scanner.hasNextInt()) {
-                choice = scanner.nextInt();
-                scanner.nextLine(); // consume newline
-            } else if (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
-                try { choice = Integer.parseInt(line); } catch (NumberFormatException ignored) {}
-            } else {
-                break;
-            }
+            int choice = CliHelper.inputInt();
 
             switch (choice) {
                 case 1:

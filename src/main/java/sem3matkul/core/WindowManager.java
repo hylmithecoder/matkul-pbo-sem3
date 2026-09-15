@@ -17,12 +17,27 @@ import java.util.Map;
 public class WindowManager {
 
     private static final Map<String, Stage> openStages = new HashMap<>();
+    private static Stage dashboardStage;
+
+    public static void setDashboardStage(Stage stage) {
+        dashboardStage = stage;
+    }
+
+    public static Stage getDashboardStage() {
+        return dashboardStage;
+    }
 
     public static Stage openWindow(String fxmlPath, String title, double width, double height) {
+        // Sembunyikan window dashboard utama saat modul dibuka
+        if (dashboardStage != null) {
+            dashboardStage.hide();
+        }
+
         // Jika jendela dengan judul/kunci tersebut sudah dibuka, bawa ke depan
         if (openStages.containsKey(fxmlPath)) {
             Stage existingStage = openStages.get(fxmlPath);
             if (existingStage.isShowing()) {
+                existingStage.setMaximized(true);
                 existingStage.toFront();
                 existingStage.requestFocus();
                 return existingStage;
@@ -51,13 +66,26 @@ public class WindowManager {
             stage.setMinWidth(width * 0.85);
             stage.setMinHeight(height * 0.85);
 
-            stage.setOnCloseRequest(event -> openStages.remove(fxmlPath));
+            stage.setOnCloseRequest(event -> {
+                openStages.remove(fxmlPath);
+                // Jika tidak ada jendela modul lain yang aktif, tampilkan kembali dashboard
+                if (dashboardStage != null && openStages.isEmpty()) {
+                    dashboardStage.show();
+                    dashboardStage.setMaximized(true);
+                }
+            });
 
             openStages.put(fxmlPath, stage);
+            stage.setMaximized(true);
             stage.show();
+            stage.setMaximized(true);
             return stage;
         } catch (IOException e) {
             e.printStackTrace();
+            if (dashboardStage != null) {
+                dashboardStage.show();
+                dashboardStage.setMaximized(true);
+            }
             return null;
         }
     }

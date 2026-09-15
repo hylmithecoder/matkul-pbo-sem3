@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="16.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sem3matkul.pertemuan3.controller.CollectionController"
+      styleClass="root" prefWidth="1020.0" prefHeight="680.0">
+    <padding>
+        <Insets top="20.0" right="24.0" bottom="20.0" left="24.0"/>
+    </padding>
+
+    <!-- Header Section -->
+    <HBox alignment="CENTER_LEFT" spacing="12.0">
+        <VBox HBox.hgrow="ALWAYS" spacing="4.0">
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <Label text="Pertemuan 3: Java Collections Framework" styleClass="title-large"/>
+                <Label text="Semester 3" styleClass="badge-tag"/>
+                <Label text="Collection" styleClass="badge-active"/>
+            </HBox>
+            <Label text="Eksplorasi 6 Koleksi: ListArray, Vec, Linked, Queue, Stack, dan Dequeue"
+                   styleClass="subtitle"/>
+        </VBox>
+    </HBox>
+
+    <!-- Main Content -->
+    <HBox spacing="16.0" VBox.vgrow="ALWAYS">
+        <!-- Left: Control & Input Card (Minimal) -->
+        <VBox spacing="14.0" styleClass="card" prefWidth="320.0" minWidth="300.0">
+            <Label text="⚙️ Kontrol Koleksi" styleClass="title-medium"/>
+            <Separator/>
+
+            <!-- Pilihan Model Koleksi -->
+            <VBox spacing="6.0">
+                <Label text="Pilih Struktur Koleksi" styleClass="label-bold"/>
+                <ComboBox fx:id="cbModel" maxWidth="Infinity" promptText="Pilih Model..."/>
+            </VBox>
+
+            <!-- Input Nilai / Data -->
+            <VBox spacing="6.0">
+                <Label text="Data / Elemen" styleClass="label-bold"/>
+                <TextField fx:id="tfInput" promptText="contoh: Elemen A"/>
+            </VBox>
+
+            <!-- Tombol Aksi Utama -->
+            <HBox spacing="8.0">
+                <Button fx:id="btnTambah" text="➕ Tambah" onAction="#handleTambah"
+                        styleClass="btn, btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button fx:id="btnHapus" text="🗑️ Hapus" onAction="#handleHapus"
+                        styleClass="btn, btn-danger" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            </HBox>
+
+            <HBox spacing="8.0">
+                <Button fx:id="btnCari" text="🔍 Cari / Peek" onAction="#handleCari"
+                        styleClass="btn, btn-secondary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button fx:id="btnClear" text="🔄 Reset" onAction="#handleClear"
+                        styleClass="btn, btn-secondary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            </HBox>
+
+            <!-- Container Khusus untuk Tombol Dinamis dari Controller .java -->
+            <VBox fx:id="customActionBox" spacing="8.0"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <!-- Status & Info Box -->
+            <VBox spacing="6.0" style="-fx-background-color: #f8fafc; -fx-padding: 12px; -fx-background-radius: 8px; -fx-border-color: #e2e8f0; -fx-border-radius: 8px;">
+                <Label fx:id="lblModelInfo" text="Model: ListArray (ArrayList)" styleClass="label-bold" style="-fx-text-fill: #2563eb;"/>
+                <Label fx:id="lblTotalItem" text="Total Elemen: 0" style="-fx-font-size: 11px; -fx-text-fill: #475569;"/>
+                <Label fx:id="lblStatusMessage" wrapText="true" style="-fx-font-size: 11px;"/>
+            </VBox>
+        </VBox>
+
+        <!-- Right: Visualization & Operations Log -->
+        <VBox spacing="14.0" styleClass="card" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <Label text="📋 Isi Koleksi &amp; Log Operasi" styleClass="title-medium" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <Separator/>
+
+            <SplitPane orientation="VERTICAL" dividerPositions="0.62" VBox.vgrow="ALWAYS"
+                       style="-fx-background-color: transparent; -fx-box-border: transparent;">
+                <!-- List View Data -->
+                <VBox spacing="6.0">
+                    <Label text="Daftar Elemen (Sesuai Struktur Koleksi):" styleClass="label-bold"/>
+                    <ListView fx:id="lvData" VBox.vgrow="ALWAYS"
+                              style="-fx-background-radius: 6px; -fx-border-color: #cbd5e1; -fx-border-radius: 6px;"/>
+                </VBox>
+
+                <!-- Console / Log View -->
+                <VBox spacing="6.0">
+                    <Label text="Console / Log Pemanggilan Method:" styleClass="label-bold"/>
+                    <TextArea fx:id="taLog" editable="false" wrapText="true" VBox.vgrow="ALWAYS"
+                              promptText="Log operasi collection akan dicatat di sini..."
+                              style="-fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 12px;"/>
+                </VBox>
+            </SplitPane>
+        </VBox>
+    </HBox>
+</VBox>
