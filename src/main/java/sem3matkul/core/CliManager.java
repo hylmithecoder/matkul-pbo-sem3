@@ -1,5 +1,8 @@
 package sem3matkul.core;
 
+import sem3matkul.core.CliHelper.*;
+import sem3matkul.pertemuan4.cli.ChatBotCLI;
+
 /**
  * CliManager - dispatcher modular untuk mode CLI.
  * Dipanggil dari App.java ketika user memilih choice 1 (CLI).
@@ -13,33 +16,28 @@ public class CliManager {
      * Nanti bisa dikembangkan jadi menu pilih pertemuan modular.
      */
     public static void start() {
-        System.out.println("\n[ CliManager ] Mode CLI aktif");
-        // Modular call - pertemuan 2 (buat scanner baru jika dipanggil tanpa scanner)
-        sem3matkul.pertemuan2.cli.ThreadCli.run();
-        System.exit(0);
-    }
-
-    public static void start(java.util.Scanner scanner) {
-        System.out.println("\n[ CliManager ] Mode CLI aktif");
-        sem3matkul.pertemuan2.cli.ThreadCli.run(scanner);
-        System.exit(0);
-    }
-
-    /**
-     * Overload untuk dispatch spesifik pertemuan (untuk pengembangan modular).
-     * @param pertemuan nomor pertemuan, mis. 2 untuk Thread
-     */
-    public static void start(int pertemuan) {
+        Log.println("\n[ CliManager ] Mode CLI aktif");
+        Log.println("Pilih Pertemuan berapa:");
+        Log.println("2. Thread");
+        Log.println("4. Api");
+        Log.print("Pilihan mu: ");
+        int pertemuan = CliHelper.inputInt();
         switch (pertemuan) {
             case 2:
-                System.out.println("[ CliManager ] Menjalankan Pertemuan 2 - Thread");
+                Log.println("[ CliManager ] Menjalankan Pertemuan 2 - Thread");
                 sem3matkul.pertemuan2.cli.ThreadCli.run();
                 break;
+            case 4:
+                Log.println("[ CliManager ] Menjalankan Pertemuan 4 - API");
+                ChatBotCLI.run();
+                break;
             default:
-                System.out.println("[ CliManager ] Pertemuan " + pertemuan + " belum tersedia di CLI");
+                Log.println("[ CliManager ] Pertemuan " + pertemuan + " belum tersedia di CLI");
                 // fallback ke default
                 sem3matkul.pertemuan2.cli.ThreadCli.run();
                 break;
         }
+        // Modular call - pertemuan 2 (buat scanner baru jika dipanggil tanpa scanner)
+        System.exit(0);
     }
 }

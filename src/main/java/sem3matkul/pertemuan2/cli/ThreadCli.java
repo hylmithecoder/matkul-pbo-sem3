@@ -5,39 +5,39 @@ package sem3matkul.pertemuan2.cli;
  * Di-run via CliManager ketika user memilih mode CLI (choice 1).
  * Menggunakan Thread & Runnable sesuai materi.
  */
+import sem3matkul.core.CliHelper.*;
 import sem3matkul.core.CliHelper;
 
 public class ThreadCli {
 
     /** Entry modular yang dipanggil CliManager - loop dengan prompt ulang */
     public static void run() {
-        run(new java.util.Scanner(System.in));
+        run(CliHelper.getScanner());
     }
 
     public static void run(java.util.Scanner scanner) {
         // Loop utama - reset dari 0 tiap iterasi
         while (true) {
-            CliHelper.print("\n=== PERTEMUAN 2: Thread (CLI Mode) ===");
+            Log.println("\n=== PERTEMUAN 2: Thread (CLI Mode) ===");
             new Kasir();
 
-            CliHelper.print("\nIngin Mengulanginya lagi?");
-            CliHelper.print("1. Ya");
-            CliHelper.print("2. No");
-            System.out.print("Pilih: ");
-            System.out.flush();
+            Log.println("\nIngin Mengulanginya lagi?");
+            Log.println("1. Ya");
+            Log.println("2. No");
+            Log.print("Pilih: ");
 
             int choice = CliHelper.inputInt();
 
             switch (choice) {
                 case 1:
-                    System.out.println("\n--- Reset dari 0 ---\n");
+                    Log.println("\n--- Reset dari 0 ---\n");
                     // lanjut loop, akan buat Kasir baru (reset dari 0)
                     break;
                 case 2:
-                    System.out.println("Selesai. Keluar CLI.");
+                    Log.println("Selesai. Keluar CLI.");
                     return;
                 default:
-                    System.out.println("Invalid Choice - keluar.");
+                    Log.println("Invalid Choice - keluar.");
                     return;
             }
         }
@@ -48,15 +48,15 @@ public class ThreadCli {
         @Override
         public void run() {
             String newThread = java.lang.Thread.currentThread().getName();
-            System.out.println("New Thread: " + newThread);
+            Log.println("New Thread: " + newThread);
 
             for (int pel = 6; pel <= 10; pel++) {
-                System.out.println(newThread + " Sedang melayani " + pel);
+                Log.println(newThread + " Sedang melayani " + pel);
                 try {
                     java.lang.Thread.sleep(400);
                 } catch (InterruptedException e) {
                     java.lang.Thread.currentThread().interrupt();
-                    System.out.println(newThread + " terinterupsi");
+                    Log.println(newThread + " terinterupsi");
                     break;
                 }
             }
@@ -68,15 +68,15 @@ public class ThreadCli {
         @Override
         public void run() {
             String newThread = java.lang.Thread.currentThread().getName();
-            System.out.println("New Thread: " + newThread);
+            Log.println("New Thread: " + newThread);
 
             for (int pel = 11; pel <= 15; pel++) {
-                System.out.println(newThread + " Sedang melayani " + pel);
+                Log.println(newThread + " Sedang melayani " + pel);
                 try {
                     java.lang.Thread.sleep(400);
                 } catch (InterruptedException e) {
                     java.lang.Thread.currentThread().interrupt();
-                    System.out.println(newThread + " terinterupsi");
+                    Log.println(newThread + " terinterupsi");
                     break;
                 }
             }
@@ -87,7 +87,7 @@ public class ThreadCli {
     static class Kasir {
         Kasir() {
             String thisThread = java.lang.Thread.currentThread().getName();
-            System.out.println("Thread Utama: " + thisThread);
+            Log.println("Thread Utama: " + thisThread);
 
             java.lang.Thread newKasir1 = new java.lang.Thread(new Kasir1(), "Kasir-1");
             newKasir1.start();
@@ -96,12 +96,12 @@ public class ThreadCli {
             newKasir2.start();
 
             for (int pel = 1; pel <= 5; pel++) {
-                System.out.println(thisThread + " Sedang melayani " + pel);
+                Log.println(thisThread + " Sedang melayani " + pel);
                 try {
                     java.lang.Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     java.lang.Thread.currentThread().interrupt();
-                    System.out.println(thisThread + " terinterupsi");
+                    Log.println(thisThread + " terinterupsi");
                     break;
                 }
             }
@@ -114,7 +114,7 @@ public class ThreadCli {
                 java.lang.Thread.currentThread().interrupt();
             }
 
-            System.out.println("=== Semua pelanggan selesai dilayani (15) ===");
+            Log.println("=== Semua pelanggan selesai dilayani (15) ===");
         }
     }
 }

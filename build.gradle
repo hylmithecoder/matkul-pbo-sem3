@@ -7,8 +7,8 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
+sourceCompatibility = '21'
+targetCompatibility = '21'
 
 javafx {
     version = '17.0.10'
@@ -18,6 +18,9 @@ javafx {
 dependencies {
     // Dependensi tambahan jika diperlukan
     implementation 'org.apache.pdfbox:pdfbox:3.0.1'
+    implementation 'com.williamcallahan:tui4j:0.3.1-preview'
+    implementation 'org.json:json:20240303'
+    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
 }
 
 application {
@@ -31,4 +34,10 @@ tasks.named('run') {
 tasks.register('testPDF', JavaExec) {
     classpath = sourceSets.test.runtimeClasspath
     mainClass = 'sem3matkul.PDFRendererTest'
+}
+
+// Dipakai jalankan-cli.sh: start script harus memakai JVM yang sama dengan
+// JVM yang meng-compile project (bytecode Java 21).
+tasks.register('printJavaHome') {
+    doLast { println System.getProperty('java.home') }
 }

@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import sem3matkul.core.WindowManager;
+import sem3matkul.core.CliHelper;
+import sem3matkul.core.CliHelper.Log;
 import java.util.*;
 import java.io.IOException;
 import java.net.URL;
@@ -48,38 +50,26 @@ public class App extends Application {
 
     public static void main(String[] args) {
         // Tanya mode via CLI saat gradle run (sesuai request: pilih GUI atau CLI)
-        System.out.println("=== Pilih Mode Aplikasi ===");
-        System.out.println("1. CLI");
-        System.out.println("2. GUI");
-        System.out.print("Masukkan pilihan (1/2): ");
+        Log.println("=== Pilih Mode Aplikasi ===");
+        Log.println("1. CLI");
+        Log.println("2. GUI");
+        Log.print("Masukkan pilihan (1/2): ");
 
-        int choice = -1;
-        // Jangan pakai try-with-resources agar System.in tidak tertutup (dibutuhkan CliManager)
-        Scanner scanner = new Scanner(System.in);
-        try {
-            if (scanner.hasNextInt()) {
-                choice = scanner.nextInt();
-            } else if (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
-                try { choice = Integer.parseInt(line); } catch (NumberFormatException ignored) {}
-            }
-        } catch (Exception e) {
-            System.out.println("Gagal baca input: " + e.getMessage());
-        }
+        int choice = CliHelper.inputInt();
 
         switch (choice) {
             case 1:
-                System.out.println("Cli");
+                Log.println("Cli");
                 // Panggil modular CLI via CliManager -> ThreadCli (pertemuan 2)
                 // Reuse scanner yang sama agar buffer tidak hilang (penting untuk piped input)
-                sem3matkul.core.CliManager.start(scanner);
+                sem3matkul.core.CliManager.start();
                 break;
             case 2:
-                System.out.println("GUI");
+                Log.println("GUI");
                 launch(args);
                 break;
             default:
-                System.out.println("Invalid Choice");
+                Log.println("Invalid Choice");
                 break;
         }
     }
