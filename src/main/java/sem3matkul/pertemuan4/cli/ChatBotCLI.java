@@ -231,7 +231,7 @@ public class ChatBotCLI implements Model {
         if (msg instanceof BotReplyMessage reply) {
             this.isLoading = false;
             conversationHistory.add(new JSONObject().put("role", "assistant").put("content", reply.content()));
-            renderedChat.add(bubble(botLabel, botBar, "POLMED AI", reply.content()));
+            renderedChat.add(bubble(botLabel, botBar, "POLMED AI", reply.content(), true));
             updateViewportContent();
             textarea.focus();
             return UpdateResult.from(this);
@@ -332,11 +332,24 @@ public class ChatBotCLI implements Model {
 
     /** Gelembung pesan: garis vertikal berwarna + label + jam + isi yang dibungkus rapi. */
     private String bubble(Style labelStyle, Style barStyle, String label, String body) {
+        return bubble(labelStyle, barStyle, label, body, false);
+    }
+
+    /**
+     * @param markdown true bila isi pesan perlu diformat sebagai Markdown
+     *                 (jawaban AI: **tebal**, judul, tabel, blok kode)
+     */
+    private String bubble(Style labelStyle, Style barStyle, String label, String body, boolean markdown) {
         String head = barStyle.render("╭─ ") + labelStyle.render(label) + " "
                 + timeStyle.render("· " + LocalTime.now().format(CLOCK));
         StringBuilder sb = new StringBuilder(head);
-        for (String line : wrap(body, chatWidth() - 3)) {
-            sb.append("\n").append(barStyle.render("│ ")).append(bodyStyle.render(line));
+
+        List<String> lines = markdown
+                ? HelperFormat.render(body, chatWidth() - 3)
+                : wrap(body, chatWidth() - 3).stream().map(bodyStyle::render).toList();
+
+        for (String line : lines) {
+            sb.append("\n").append(barStyle.render("│ ")).append(line);
         }
         sb.append("\n").append(barStyle.render("╰─"));
         return sb.toString();

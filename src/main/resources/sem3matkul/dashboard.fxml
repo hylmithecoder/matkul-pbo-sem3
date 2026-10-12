@@ -68,6 +68,30 @@
                     </VBox>
                     <Button text="📁 Buka Window" onAction="#handleBukaPertemuan3" styleClass="btn, btn-primary"/>
                 </HBox>
+
+                <!-- Pertemuan 4 Card -->
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="Pertemuan 4: Java API (String &amp; LocalDate)" styleClass="title-medium"/>
+                            <Label text="Aktif" styleClass="badge-active"/>
+                        </HBox>
+                        <Label text="Materi: Manipulasi String (length, toUpperCase, contains) dan penanganan tanggal sistem dengan LocalDate." styleClass="subtitle"/>
+                    </VBox>
+                    <Button text="🚀 Buka Window" onAction="#handleBukaPertemuan4" styleClass="btn, btn-primary"/>
+                </HBox>
+
+                <!-- Pertemuan 5 Card -->
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="Pertemuan 5: Database Perpustakaan (MySQL &amp; JDBC)" styleClass="title-medium"/>
+                            <Label text="Aktif" styleClass="badge-active"/>
+                        </HBox>
+                        <Label text="Materi: Inisialisasi skema SQL, re-scheme, operasi CRUD katalog buku &amp; siswa, serta transaksi peminjaman/pengembalian." styleClass="subtitle"/>
+                    </VBox>
+                    <Button text="🚀 Buka Window" onAction="#handleBukaPertemuan5" styleClass="btn, btn-primary"/>
+                </HBox>
             </VBox>
         </ScrollPane>
     </VBox>

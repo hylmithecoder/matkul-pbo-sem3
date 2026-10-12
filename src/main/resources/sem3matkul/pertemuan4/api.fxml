@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="16.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sem3matkul.pertemuan4.controller.JavaAPIController"
+      styleClass="root" prefWidth="1020.0" prefHeight="680.0">
+    <padding>
+        <Insets top="20.0" right="24.0" bottom="20.0" left="24.0"/>
+    </padding>
+
+    <!-- Header Section -->
+    <HBox alignment="CENTER_LEFT" spacing="12.0">
+        <VBox HBox.hgrow="ALWAYS" spacing="4.0">
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <Label text="Pertemuan 4: Eksplorasi Java API" styleClass="title-large"/>
+                <Label text="Semester 3" styleClass="badge-tag"/>
+                <Label text="Java API" styleClass="badge-active"/>
+            </HBox>
+            <Label text="Demonstrasi manipulasi teks dengan class String (length, toUpperCase, contains) &amp; tanggal sistem dengan LocalDate"
+                   styleClass="subtitle"/>
+        </VBox>
+    </HBox>
+
+    <!-- Main Content (Input on Left, Results on Right) -->
+    <HBox spacing="16.0" VBox.vgrow="ALWAYS">
+        <!-- Left: Input Form Card -->
+        <VBox spacing="14.0" styleClass="card" prefWidth="380.0" minWidth="340.0">
+            <Label text="📝 Parameter &amp; Input Kalimat" styleClass="title-medium"/>
+            <Separator/>
+
+            <VBox spacing="6.0">
+                <Label text="Masukkan Kalimat:" styleClass="label-bold"/>
+                <TextArea fx:id="taInputKalimat" promptText="Ketik atau tempel sebuah kalimat di sini..."
+                          prefRowCount="4" wrapText="true"/>
+            </VBox>
+
+            <VBox spacing="6.0">
+                <Label text="Kata yang Ingin Diperiksa (contains):" styleClass="label-bold"/>
+                <TextField fx:id="tfKataKunci" promptText="contoh: Java"/>
+            </VBox>
+
+            <CheckBox fx:id="cbIgnoreCase" text="Abaikan besar/kecil huruf (Case-Insensitive)" selected="true"/>
+
+            <Label fx:id="lblStatusMessage" wrapText="true" style="-fx-font-size: 11px;"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <HBox spacing="8.0">
+                <Button text="⚡ Proses Analisis" onAction="#handleProses"
+                        styleClass="btn, btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button text="🔄 Reset" onAction="#handleReset"
+                        styleClass="btn, btn-secondary"/>
+            </HBox>
+        </VBox>
+
+        <!-- Right: Results Card -->
+        <VBox spacing="14.0" styleClass="card" HBox.hgrow="ALWAYS">
+            <Label text="📊 Hasil Analisis Java API" styleClass="title-medium"/>
+            <Separator/>
+
+            <!-- Metric: Tanggal Eksekusi (LocalDate) -->
+            <HBox spacing="12.0" alignment="CENTER_LEFT"
+                  style="-fx-background-color: #f8fafc; -fx-padding: 10px 14px; -fx-background-radius: 8px; -fx-border-color: #e2e8f0; -fx-border-radius: 8px;">
+                <Label text="📅 Tanggal Program Dijalankan (LocalDate):" styleClass="label-bold"/>
+                <Label fx:id="lblTanggal" text="-" style="-fx-font-weight: bold; -fx-text-fill: #1e40af;"/>
+            </HBox>
+
+            <!-- Metric: Jumlah Karakter (String.length()) -->
+            <HBox spacing="12.0" alignment="CENTER_LEFT"
+                  style="-fx-background-color: #f8fafc; -fx-padding: 10px 14px; -fx-background-radius: 8px; -fx-border-color: #e2e8f0; -fx-border-radius: 8px;">
+                <Label text="🔢 Jumlah Karakter (String.length()):" styleClass="label-bold"/>
+                <Label fx:id="lblJumlahKarakter" text="0 karakter" style="-fx-font-weight: bold; -fx-text-fill: #059669;"/>
+            </HBox>
+
+            <!-- Metric: Pemeriksaan Kata (String.contains()) -->
+            <VBox spacing="6.0"
+                  style="-fx-background-color: #f8fafc; -fx-padding: 10px 14px; -fx-background-radius: 8px; -fx-border-color: #e2e8f0; -fx-border-radius: 8px;">
+                <Label text="🔍 Pemeriksaan Kata Kunci (String.contains()):" styleClass="label-bold"/>
+                <Label fx:id="lblHasilContains" text="Belum diproses (masukkan kata lalu klik proses)"
+                       style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+            </VBox>
+
+            <!-- Metric: Huruf Kapital (String.toUpperCase()) -->
+            <VBox spacing="6.0" VBox.vgrow="ALWAYS">
+                <Label text="🔠 Seluruh Kalimat Menjadi Huruf Kapital (String.toUpperCase()):" styleClass="label-bold"/>
+                <TextArea fx:id="taKalimatKapital" editable="false" wrapText="true" VBox.vgrow="ALWAYS"
+                          promptText="Hasil konversi seluruh kalimat ke huruf kapital akan muncul di sini..."/>
+            </VBox>
+        </VBox>
+    </HBox>
+
+    <!-- Bottom: Notes Section -->
+    <VBox spacing="6.0" styleClass="notes-box">
+        <HBox alignment="CENTER_LEFT" spacing="6.0">
+            <Label text="💡 Ringkasan Materi Java API:" styleClass="notes-title"/>
+        </HBox>
+        <Label text="• String.length(): Menghitung total karakter (termasuk spasi dan tanda baca) dalam string." styleClass="notes-text"/>
+        <Label text="• String.toUpperCase(): Mengonversi semua huruf dalam string menjadi huruf besar/kapital." styleClass="notes-text"/>
+        <Label text="• String.contains(): Memeriksa apakah suatu substring ada di dalam string (menghasilkan boolean true/false)." styleClass="notes-text"/>
+        <Label text="• LocalDate.now(): Class dari java.time (sejak Java 8) untuk merepresentasikan tanggal sistem (tanpa zona waktu dan jam)." styleClass="notes-text"/>
+    </VBox>
+</VBox>

@@ -1,7 +1,10 @@
 package sem3matkul.core;
 
+import java.sql.SQLException;
+import java.sql.Connection;
 import sem3matkul.core.CliHelper.*;
-import sem3matkul.pertemuan4.cli.ChatBotCLI;
+import sem3matkul.pertemuan4.cli.*;
+import sem3matkul.pertemuan5.*;
 
 /**
  * CliManager - dispatcher modular untuk mode CLI.
@@ -20,6 +23,8 @@ public class CliManager {
         Log.println("Pilih Pertemuan berapa:");
         Log.println("2. Thread");
         Log.println("4. Api");
+        Log.println("5. Api Sederhana");
+        Log.println("6. Koneksi MYSQL Sederhana");
         Log.print("Pilihan mu: ");
         int pertemuan = CliHelper.inputInt();
         switch (pertemuan) {
@@ -30,6 +35,46 @@ public class CliManager {
             case 4:
                 Log.println("[ CliManager ] Menjalankan Pertemuan 4 - API");
                 ChatBotCLI.run();
+                break;
+            case 5:
+                Log.println("[ CliManager ] Menjalankan Pertemuan 5 - API Sederhana");
+                ApiSederhana sederhana = new ApiSederhana();
+                sederhana.main();
+                break;
+            case 6:
+                Log.println("[ CliManager ] Menjalankan Pertemuan 6 - Koneksi & Skema Database Perpustakaan");
+                Log.println("Pilih Aksi Database:");
+                Log.println("1. Test Koneksi");
+                Log.println("2. Inisialisasi Database (Create table jika belum ada)");
+                Log.println("3. Rescheme Database (Drop & buat ulang + seed dummy data)");
+                Log.println("4. Cek Status & Jumlah Data Tabel");
+                Log.print("Pilihan aksi: ");
+                int dbAksi = CliHelper.inputInt();
+                try {
+                    switch (dbAksi) {
+                        case 1:
+                            try (Connection conn = Database.connect()) {
+                                Log.println("✅ Berhasil terhubung ke database: " + Database.getUrl());
+                            }
+                            break;
+                        case 2:
+                            DbInitializer.initDatabase();
+                            DbInitializer.printTableStatus();
+                            break;
+                        case 3:
+                            DbInitializer.rescheme(true);
+                            DbInitializer.printTableStatus();
+                            break;
+                        case 4:
+                            DbInitializer.printTableStatus();
+                            break;
+                        default:
+                            Log.println("Pilihan tidak valid.");
+                            break;
+                    }
+                } catch (SQLException e) {
+                    System.err.println("❌ Kesalahan Database: " + e.getMessage());
+                }
                 break;
             default:
                 Log.println("[ CliManager ] Pertemuan " + pertemuan + " belum tersedia di CLI");

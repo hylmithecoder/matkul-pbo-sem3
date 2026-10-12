@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS buku (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nama VARCHAR(255) NOT NULL,
+    penulis VARCHAR(150),
+    tipe VARCHAR(150),
+    genre VARCHAR(150),
+    stok INT NOT NULL DEFAULT 1
+);

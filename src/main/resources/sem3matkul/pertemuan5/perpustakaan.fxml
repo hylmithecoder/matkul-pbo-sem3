@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="16.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sem3matkul.pertemuan5.controller.PerpustakaanController"
+      styleClass="root" prefWidth="1080.0" prefHeight="720.0">
+    <padding>
+        <Insets top="18.0" right="22.0" bottom="18.0" left="22.0"/>
+    </padding>
+
+    <!-- Header Section -->
+    <HBox alignment="CENTER_LEFT" spacing="12.0">
+        <VBox HBox.hgrow="ALWAYS" spacing="4.0">
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <Label text="Pertemuan 5: Sistem Informasi Perpustakaan &amp; Database MySQL" styleClass="title-large"/>
+                <Label text="Semester 3" styleClass="badge-tag"/>
+                <Label text="JDBC &amp; SQL" styleClass="badge-active"/>
+            </HBox>
+            <Label text="Manajemen Katalog Buku, Data Anggota/Siswa, Transaksi Peminjaman/Pengembalian, dan Operasi Skema Database"
+                   styleClass="subtitle"/>
+        </VBox>
+        <Button text="🔄 Segarkan Data" onAction="#refreshAllData" styleClass="btn, btn-secondary"/>
+    </HBox>
+
+    <!-- Tabbed Navigation Area -->
+    <TabPane VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+
+        <!-- TAB 1: KATALOG BUKU -->
+        <Tab text="📚 Katalog Buku">
+            <HBox spacing="16.0" style="-fx-padding: 14px 0 0 0;">
+                <!-- Left: Form Buku -->
+                <VBox spacing="12.0" styleClass="card" prefWidth="340.0" minWidth="320.0">
+                    <Label text="📝 Form Input &amp; Edit Buku" styleClass="title-medium"/>
+                    <Separator/>
+
+                    <VBox spacing="6.0">
+                        <Label text="Judul / Nama Buku:" styleClass="label-bold"/>
+                        <TextField fx:id="tfBukuNama" promptText="contoh: Pemrograman Java Lanjut"/>
+                    </VBox>
+
+                    <VBox spacing="6.0">
+                        <Label text="Penulis / Pengarang:" styleClass="label-bold"/>
+                        <TextField fx:id="tfBukuPenulis" promptText="contoh: Dr. Indrajit"/>
+                    </VBox>
+
+                    <HBox spacing="10.0">
+                        <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                            <Label text="Tipe Koleksi:" styleClass="label-bold"/>
+                            <ComboBox fx:id="cbBukuTipe" promptText="Pilih tipe..." maxWidth="Infinity"/>
+                        </VBox>
+                        <VBox spacing="6.0" prefWidth="100.0">
+                            <Label text="Jumlah Stok:" styleClass="label-bold"/>
+                            <Spinner fx:id="spBukuStok" editable="true" maxWidth="Infinity"/>
+                        </VBox>
+                    </HBox>
+
+                    <VBox spacing="6.0">
+                        <Label text="Genre / Kategori:" styleClass="label-bold"/>
+                        <TextField fx:id="tfBukuGenre" promptText="contoh: Teknologi / Fiksi"/>
+                    </VBox>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <HBox spacing="8.0">
+                        <Button text="➕ Simpan Baru" onAction="#handleTambahBuku" styleClass="btn, btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                        <Button text="✏️ Update" onAction="#handleUpdateBuku" styleClass="btn, btn-secondary"/>
+                    </HBox>
+                    <HBox spacing="8.0">
+                        <Button text="🗑️ Hapus" onAction="#handleHapusBuku" styleClass="btn, btn-danger"/>
+                        <Button text="🔄 Reset Form" onAction="#handleResetBuku" styleClass="btn, btn-secondary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Right: Table Buku -->
+                <VBox spacing="12.0" styleClass="card" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                        <Label text="📋 Daftar Koleksi Buku Perpustakaan" styleClass="title-medium" HBox.hgrow="ALWAYS"/>
+                        <TextField fx:id="tfSearchBuku" promptText="🔍 Cari judul, penulis, atau genre..." prefWidth="280.0"/>
+                    </HBox>
+
+                    <TableView fx:id="tableBuku" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colBukuId" text="ID" prefWidth="50.0"/>
+                            <TableColumn fx:id="colBukuNama" text="Judul / Nama Buku" prefWidth="250.0"/>
+                            <TableColumn fx:id="colBukuPenulis" text="Penulis" prefWidth="150.0"/>
+                            <TableColumn fx:id="colBukuTipe" text="Tipe" prefWidth="110.0"/>
+                            <TableColumn fx:id="colBukuGenre" text="Genre" prefWidth="130.0"/>
+                            <TableColumn fx:id="colBukuStok" text="Stok" prefWidth="70.0"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Tidak ada data buku di database."/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </HBox>
+        </Tab>
+
+        <!-- TAB 2: DATA SISWA -->
+        <Tab text="👥 Data Siswa">
+            <HBox spacing="16.0" style="-fx-padding: 14px 0 0 0;">
+                <!-- Left: Form Siswa -->
+                <VBox spacing="12.0" styleClass="card" prefWidth="340.0" minWidth="320.0">
+                    <Label text="📝 Form Input &amp; Edit Siswa" styleClass="title-medium"/>
+                    <Separator/>
+
+                    <VBox spacing="6.0">
+                        <Label text="Nomor Induk Mahasiswa (NIM):" styleClass="label-bold"/>
+                        <TextField fx:id="tfSiswanim" promptText="contoh: 2024001"/>
+                    </VBox>
+
+                    <VBox spacing="6.0">
+                        <Label text="Nama Lengkap:" styleClass="label-bold"/>
+                        <TextField fx:id="tfSiswaNama" promptText="contoh: Ahmad Dani"/>
+                    </VBox>
+
+                    <VBox spacing="6.0">
+                        <Label text="Kelas:" styleClass="label-bold"/>
+                        <TextField fx:id="tfSiswaKelas" promptText="contoh: XII RPL 1"/>
+                    </VBox>
+
+                    <VBox spacing="6.0">
+                        <Label text="Jurusan:" styleClass="label-bold"/>
+                        <TextField fx:id="tfSiswaJurusan" promptText="contoh: Rekayasa Perangkat Lunak"/>
+                    </VBox>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <HBox spacing="8.0">
+                        <Button text="➕ Simpan Baru" onAction="#handleTambahSiswa" styleClass="btn, btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                        <Button text="✏️ Update" onAction="#handleUpdateSiswa" styleClass="btn, btn-secondary"/>
+                    </HBox>
+                    <HBox spacing="8.0">
+                        <Button text="🗑️ Hapus" onAction="#handleHapusSiswa" styleClass="btn, btn-danger"/>
+                        <Button text="🔄 Reset Form" onAction="#handleResetSiswa" styleClass="btn, btn-secondary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Right: Table Siswa -->
+                <VBox spacing="12.0" styleClass="card" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                        <Label text="📋 Daftar Anggota Siswa" styleClass="title-medium" HBox.hgrow="ALWAYS"/>
+                        <TextField fx:id="tfSearchSiswa" promptText="🔍 Cari nama, NIM, atau kelas..." prefWidth="280.0"/>
+                    </HBox>
+
+                    <TableView fx:id="tableSiswa" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colSiswaId" text="ID" prefWidth="50.0"/>
+                            <TableColumn fx:id="colSiswanim" text="NIM" prefWidth="120.0"/>
+                            <TableColumn fx:id="colSiswaNama" text="Nama Siswa" prefWidth="220.0"/>
+                            <TableColumn fx:id="colSiswaKelas" text="Kelas" prefWidth="120.0"/>
+                            <TableColumn fx:id="colSiswaJurusan" text="Jurusan" prefWidth="200.0"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Tidak ada data siswa di database."/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </HBox>
+        </Tab>
+
+        <!-- TAB 3: PEMINJAMAN & PENGEMBALIAN -->
+        <Tab text="🔄 Peminjaman &amp; Pengembalian">
+            <VBox spacing="14.0" style="-fx-padding: 14px 0 0 0;">
+                <!-- Form Transaksi Card -->
+                <VBox spacing="12.0" styleClass="card">
+                    <Label text="📌 Catat Transaksi Peminjaman Baru" styleClass="title-medium"/>
+                    <Separator/>
+
+                    <HBox spacing="14.0" alignment="CENTER_LEFT">
+                        <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                            <Label text="Siswa / Peminjam:" styleClass="label-bold"/>
+                            <ComboBox fx:id="cbPinjamSiswa" promptText="Pilih Siswa..." maxWidth="Infinity"/>
+                        </VBox>
+
+                        <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                            <Label text="Buku yang Dipinjam:" styleClass="label-bold"/>
+                            <ComboBox fx:id="cbPinjamBuku" promptText="Pilih Buku Tersedia..." maxWidth="Infinity"/>
+                        </VBox>
+
+                        <VBox spacing="4.0" prefWidth="220.0">
+                            <Label text="Petugas Bertugas:" styleClass="label-bold"/>
+                            <ComboBox fx:id="cbPinjamPetugas" promptText="Pilih Petugas..." maxWidth="Infinity"/>
+                        </VBox>
+
+                        <VBox spacing="4.0" prefWidth="160.0">
+                            <Label text="Tgl Pinjam:" styleClass="label-bold"/>
+                            <DatePicker fx:id="dpPinjamTglPinjam" maxWidth="Infinity"/>
+                        </VBox>
+
+                        <VBox spacing="4.0" prefWidth="160.0">
+                            <Label text="Jatuh Tempo:" styleClass="label-bold"/>
+                            <DatePicker fx:id="dpPinjamTglJatuhTempo" maxWidth="Infinity"/>
+                        </VBox>
+
+                        <VBox spacing="4.0" alignment="BOTTOM_CENTER">
+                            <Button text="📥 Catat Pinjam" onAction="#handleCatatPinjam" styleClass="btn, btn-primary" prefHeight="35.0"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Table Transaksi Card -->
+                <VBox spacing="12.0" styleClass="card" VBox.vgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                        <Label text="📋 Riwayat &amp; Status Transaksi Peminjaman" styleClass="title-medium" HBox.hgrow="ALWAYS"/>
+
+                        <Label text="Filter Status:" styleClass="label-bold"/>
+                        <ComboBox fx:id="cbFilterPinjamStatus" prefWidth="140.0"/>
+
+                        <Button text="↩️ Proses Pengembalian Buku" onAction="#handleKembalikanBuku"
+                                styleClass="btn, btn-primary" style="-fx-background-color: #16a34a;"/>
+                        <Button text="🗑️ Hapus Catatan" onAction="#handleHapusPeminjaman" styleClass="btn, btn-danger"/>
+                    </HBox>
+
+                    <TableView fx:id="tablePinjam" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colPinjamId" text="ID" prefWidth="50.0"/>
+                            <TableColumn fx:id="colPinjamSiswa" text="Siswa" prefWidth="180.0"/>
+                            <TableColumn fx:id="colPinjamBuku" text="Buku Dipinjam" prefWidth="240.0"/>
+                            <TableColumn fx:id="colPinjamPetugas" text="Petugas" prefWidth="140.0"/>
+                            <TableColumn fx:id="colPinjamTglPinjam" text="Tgl Pinjam" prefWidth="100.0"/>
+                            <TableColumn fx:id="colPinjamTglJatuhTempo" text="Jatuh Tempo" prefWidth="100.0"/>
+                            <TableColumn fx:id="colPinjamTglKembali" text="Tgl Kembali" prefWidth="100.0"/>
+                            <TableColumn fx:id="colPinjamStatus" text="Status" prefWidth="90.0"/>
+                            <TableColumn fx:id="colPinjamDenda" text="Denda" prefWidth="100.0"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Belum ada riwayat transaksi peminjaman."/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </VBox>
+        </Tab>
+
+        <!-- TAB 4: DATABASE & PETUGAS -->
+        <Tab text="🛠️ Database &amp; Petugas">
+            <HBox spacing="16.0" style="-fx-padding: 14px 0 0 0;">
+                <!-- Left: Database Control Card -->
+                <VBox spacing="14.0" styleClass="card" prefWidth="420.0" minWidth="380.0">
+                    <Label text="⚙️ Kontrol Database &amp; Skema" styleClass="title-medium"/>
+                    <Separator/>
+
+                    <VBox spacing="8.0" style="-fx-background-color: #f8fafc; -fx-padding: 12px; -fx-background-radius: 8px; -fx-border-color: #e2e8f0; -fx-border-radius: 8px;">
+                        <Label fx:id="lblDbStatus" text="Memeriksa koneksi database..." styleClass="label-bold"/>
+                        <Label fx:id="lblDbUrl" text="URL: -" style="-fx-font-size: 11px; -fx-text-fill: #64748b;" wrapText="true"/>
+                    </VBox>
+
+                    <VBox spacing="8.0">
+                        <Label text="Operasi Inisialisasi &amp; Reset:" styleClass="label-bold"/>
+                        <Label text="Inisialisasi tabel memastikan skema telah dibuat (CREATE TABLE IF NOT EXISTS) tanpa menghapus data yang ada."
+                               styleClass="subtitle" wrapText="true"/>
+                        <Button text="⚡ Inisialisasi Skema Database" onAction="#handleInitDatabase"
+                                styleClass="btn, btn-secondary" maxWidth="Infinity"/>
+                    </VBox>
+
+                    <Separator/>
+
+                    <VBox spacing="8.0">
+                        <Label text="Tindakan Rescheme:" styleClass="label-bold"/>
+                        <Label text="Re-scheme akan men-drop seluruh tabel perpustakaan (dipinjam, buku, siswa, petugas), membuat ulang dari skrip .sql, dan mengisi seed dummy data awal."
+                               styleClass="subtitle" wrapText="true"/>
+                        <Button text="⚠️ Re-Scheme Database (Drop &amp; Re-Create)" onAction="#handleReschemeDatabase"
+                                styleClass="btn, btn-danger" maxWidth="Infinity"/>
+                    </VBox>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <Label text="💡 Skrip skema SQL terletak di: /sem3matkul/pertemuan5/scheme/"
+                           style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                </VBox>
+
+                <!-- Right: Petugas Perpustakaan Card -->
+                <VBox spacing="12.0" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label text="👤 Manajemen Petugas Perpustakaan" styleClass="title-medium"/>
+                    <Separator/>
+
+                    <HBox spacing="10.0" alignment="CENTER_LEFT">
+                        <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                            <Label text="Nama Petugas:" styleClass="label-bold"/>
+                            <TextField fx:id="tfPetugasNama" promptText="contoh: Siti Rahmawati"/>
+                        </VBox>
+                        <VBox spacing="4.0" prefWidth="180.0">
+                            <Label text="Username:" styleClass="label-bold"/>
+                            <TextField fx:id="tfPetugasUsername" promptText="contoh: sitirahma"/>
+                        </VBox>
+                        <VBox spacing="4.0" prefWidth="180.0">
+                            <Label text="Password:" styleClass="label-bold"/>
+                            <PasswordField fx:id="pfPetugasPassword" promptText="password..."/>
+                        </VBox>
+                        <VBox spacing="4.0" alignment="BOTTOM_CENTER">
+                            <Button text="➕ Tambah" onAction="#handleTambahPetugas" styleClass="btn, btn-primary" prefHeight="35.0"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                        <Label text="Daftar Petugas Terdaftar:" styleClass="label-bold" HBox.hgrow="ALWAYS"/>
+                        <Button text="🗑️ Hapus Petugas" onAction="#handleHapusPetugas" styleClass="btn, btn-danger"/>
+                        <Button text="🔄 Reset Form" onAction="#handleResetPetugas" styleClass="btn, btn-secondary"/>
+                    </HBox>
+
+                    <TableView fx:id="tablePetugas" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colPetugasId" text="ID" prefWidth="60.0"/>
+                            <TableColumn fx:id="colPetugasNama" text="Nama Petugas" prefWidth="250.0"/>
+                            <TableColumn fx:id="colPetugasUsername" text="Username" prefWidth="180.0"/>
+                            <TableColumn fx:id="colPetugasCreatedAt" text="Terdaftar Sejak" prefWidth="180.0"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Belum ada data petugas."/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </HBox>
+        </Tab>
+    </TabPane>
+</VBox>

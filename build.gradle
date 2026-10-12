@@ -21,6 +21,7 @@ dependencies {
     implementation 'com.williamcallahan:tui4j:0.3.1-preview'
     implementation 'org.json:json:20240303'
     implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+    implementation 'com.mysql:mysql-connector-j:8.4.0'
 }
 
 application {
@@ -34,6 +35,11 @@ tasks.named('run') {
 tasks.register('testPDF', JavaExec) {
     classpath = sourceSets.test.runtimeClasspath
     mainClass = 'sem3matkul.PDFRendererTest'
+}
+
+tasks.register('testGUI', JavaExec) {
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'sem3matkul.PerpustakaanGuiTest'
 }
 
 // Dipakai jalankan-cli.sh: start script harus memakai JVM yang sama dengan

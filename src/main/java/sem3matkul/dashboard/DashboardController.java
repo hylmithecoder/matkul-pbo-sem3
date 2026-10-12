@@ -43,6 +43,26 @@ public class DashboardController {
     }
 
     @FXML
+    private void handleBukaPertemuan4() {
+        WindowManager.openWindow(
+                "/sem3matkul/pertemuan4/api.fxml",
+                "Pertemuan 4 - Java API (String & LocalDate)",
+                1020,
+                680
+        );
+    }
+
+    @FXML
+    private void handleBukaPertemuan5() {
+        WindowManager.openWindow(
+                "/sem3matkul/pertemuan5/perpustakaan.fxml",
+                "Pertemuan 5 - Sistem Perpustakaan & Database MySQL",
+                1080,
+                720
+        );
+    }
+
+    @FXML
     private void handleKeluar() {
         Platform.exit();
     }
