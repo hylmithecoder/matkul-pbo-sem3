@@ -42,6 +42,11 @@ tasks.register('testGUI', JavaExec) {
     mainClass = 'sem3matkul.PerpustakaanGuiTest'
 }
 
+tasks.register('testPertemuan7GUI', JavaExec) {
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'sem3matkul.Pertemuan7GuiTest'
+}
+
 // Dipakai jalankan-cli.sh: start script harus memakai JVM yang sama dengan
 // JVM yang meng-compile project (bytecode Java 21).
 tasks.register('printJavaHome') {

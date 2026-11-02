@@ -63,7 +63,18 @@ public class DashboardController {
     }
 
     @FXML
+    private void handleBukaPertemuan7() {
+        WindowManager.openWindow(
+                "/sem3matkul/pertemuan7/swing.fxml",
+                "Pertemuan 7 - Pemrograman GUI dengan Java Swing",
+                1020,
+                680
+        );
+    }
+
+    @FXML
     private void handleKeluar() {
         Platform.exit();
+        System.exit(0);
     }
 }

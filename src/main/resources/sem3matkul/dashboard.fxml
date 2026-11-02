@@ -92,6 +92,18 @@
                     </VBox>
                     <Button text="🚀 Buka Window" onAction="#handleBukaPertemuan5" styleClass="btn, btn-primary"/>
                 </HBox>
+
+                <!-- Pertemuan 7 Card -->
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="Pertemuan 7: Pemrograman GUI dengan Java Swing" styleClass="title-medium"/>
+                            <Label text="Aktif" styleClass="badge-active"/>
+                        </HBox>
+                        <Label text="Materi: JFrame dasar (HalloGUI), komponen input Swing (KomponenDasar), Layout Manager (DemoLayout), dan Form Anggota." styleClass="subtitle"/>
+                    </VBox>
+                    <Button text="🚀 Buka Window" onAction="#handleBukaPertemuan7" styleClass="btn, btn-primary"/>
+                </HBox>
             </VBox>
         </ScrollPane>
     </VBox>

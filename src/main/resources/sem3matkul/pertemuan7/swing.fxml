@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="16.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sem3matkul.pertemuan7.controller.SwingController"
+      styleClass="root" prefWidth="1020.0" prefHeight="680.0">
+    <padding>
+        <Insets top="20.0" right="24.0" bottom="20.0" left="24.0"/>
+    </padding>
+
+    <!-- Header Section -->
+    <HBox alignment="CENTER_LEFT" spacing="12.0">
+        <VBox HBox.hgrow="ALWAYS" spacing="4.0">
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <Label text="Pertemuan 7: Pemrograman GUI dengan Java Swing" styleClass="title-large"/>
+                <Label text="Semester 3" styleClass="badge-tag"/>
+                <Label text="Java Swing" styleClass="badge-active"/>
+            </HBox>
+            <Label text="Peluncur interaktif untuk 4 percobaan Swing GUI: JFrame Dasar, Komponen Form, Layout Manager, dan Form Anggota"
+                   styleClass="subtitle"/>
+        </VBox>
+        <Button text="🧹 Tutup Semua Swing" onAction="#handleTutupSemuaSwing" styleClass="btn, btn-secondary"/>
+    </HBox>
+
+    <!-- Main Card: 4 Tombol Pembuka Swing GUI -->
+    <VBox spacing="14.0" styleClass="card" VBox.vgrow="ALWAYS">
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label text="🖥️ Modul Praktikum Swing GUI (4 Percobaan)" styleClass="title-medium" HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblJumlahAktif" text="0 jendela aktif" styleClass="badge-tag"/>
+        </HBox>
+        <Separator/>
+
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+            <VBox spacing="12.0">
+                <!-- Tombol 1: HalloGUI -->
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="1. Percobaan 1 — Halo GUI (HalloGUI)" styleClass="title-medium"/>
+                            <Label text="JFrame Dasar" styleClass="badge-active"/>
+                        </HBox>
+                        <Label text="Menampilkan jendela JFrame pertama di Event Dispatch Thread (EDT) berisi JLabel, JButton, dan ActionListener sederhana."
+                               styleClass="subtitle" wrapText="true"/>
+                    </VBox>
+                    <Button text="🚀 Buka HalloGUI" onAction="#handleBukaHalloGUI"
+                            styleClass="btn, btn-primary" minWidth="185.0"/>
+                </HBox>
+
+                <!-- Tombol 2: KomponenDasar -->
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="2. Percobaan 2 — Komponen Dasar Swing (KomponenDasar)" styleClass="title-medium"/>
+                            <Label text="Komponen Input" styleClass="badge-active"/>
+                        </HBox>
+                        <Label text="Form pendaftaran akun perpustakaan dengan JTextField, JPasswordField, JRadioButton + ButtonGroup, JComboBox, JCheckBox, dan JTextArea."
+                               styleClass="subtitle" wrapText="true"/>
+                    </VBox>
+                    <Button text="🚀 Buka KomponenDasar" onAction="#handleBukaKomponenDasar"
+                            styleClass="btn, btn-primary" minWidth="185.0"/>
+                </HBox>
+
+                <!-- Tombol 3: DemoLayout -->
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="3. Percobaan 3 — Demo Layout Manager (DemoLayout)" styleClass="title-medium"/>
+                            <Label text="Layout Manager" styleClass="badge-active"/>
+                        </HBox>
+                        <Label text="Empat tab JTabbedPane yang memperlihatkan perbandingan FlowLayout, BorderLayout, GridLayout, dan kombinasi layout bersarang."
+                               styleClass="subtitle" wrapText="true"/>
+                    </VBox>
+                    <Button text="🚀 Buka DemoLayout" onAction="#handleBukaDemoLayout"
+                            styleClass="btn, btn-primary" minWidth="185.0"/>
+                </HBox>
+
+                <!-- Tombol 4: FormAnggota -->
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="4. Percobaan 4 — Form Anggota Perpustakaan (FormAnggota)" styleClass="title-medium"/>
+                            <Label text="Form &amp; Event" styleClass="badge-active"/>
+                        </HBox>
+                        <Label text="Form lengkap berbasis BorderLayout &amp; GridBagLayout dengan validasi input, penyimpanan POJO Anggota di List memori, dan log aktivitas."
+                               styleClass="subtitle" wrapText="true"/>
+                    </VBox>
+                    <Button text="🚀 Buka FormAnggota" onAction="#handleBukaFormAnggota"
+                            styleClass="btn, btn-primary" minWidth="185.0"/>
+                </HBox>
+            </VBox>
+        </ScrollPane>
+
+        <!-- Status Bar -->
+        <HBox spacing="10.0" alignment="CENTER_LEFT"
+              style="-fx-background-color: #f8fafc; -fx-padding: 10px 14px; -fx-background-radius: 8px; -fx-border-color: #e2e8f0; -fx-border-radius: 8px;">
+            <Label text="Status Peluncur:" styleClass="label-bold"/>
+            <Label fx:id="lblStatusMessage" text="-" style="-fx-text-fill: #1e40af; -fx-font-weight: bold;" HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </VBox>
+
+    <!-- Bottom: Notes Section -->
+    <VBox spacing="6.0" styleClass="notes-box">
+        <HBox alignment="CENTER_LEFT" spacing="6.0">
+            <Label text="💡 Catatan Teknis Integrasi JavaFX &amp; Swing:" styleClass="notes-title"/>
+        </HBox>
+        <Label text="• Seluruh jendela Swing dijalankan pada Event Dispatch Thread (EDT) melalui SwingUtilities.invokeLater() dengan tema Nimbus." styleClass="notes-text"/>
+        <Label text="• Setiap JFrame diatur memakai DISPOSE_ON_CLOSE agar menutup jendela percobaan Swing tidak ikut menghentikan aplikasi Dashboard utama." styleClass="notes-text"/>
+    </VBox>
+</VBox>
