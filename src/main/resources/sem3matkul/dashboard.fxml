@@ -104,6 +104,18 @@
                     </VBox>
                     <Button text="🚀 Buka Window" onAction="#handleBukaPertemuan7" styleClass="btn, btn-primary"/>
                 </HBox>
+
+                <!-- Pertemuan 10 Card -->
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="Pertemuan 10: Input Data ke Database" styleClass="title-medium"/>
+                            <Label text="Aktif" styleClass="badge-active"/>
+                        </HBox>
+                        <Label text="Materi: Form Swing Anggota &amp; Buku yang menyimpan ke MariaDB lewat DAO, diluncurkan dari panel JavaFX." styleClass="subtitle"/>
+                    </VBox>
+                    <Button text="🚀 Buka Window" onAction="#handleBukaPertemuan10" styleClass="btn, btn-primary"/>
+                </HBox>
             </VBox>
         </ScrollPane>
     </VBox>

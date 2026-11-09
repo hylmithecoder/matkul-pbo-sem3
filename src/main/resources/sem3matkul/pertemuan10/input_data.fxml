@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="16.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sem3matkul.pertemuan10.controller.InputDataController"
+      styleClass="root" prefWidth="1020.0" prefHeight="680.0">
+    <padding>
+        <Insets top="20.0" right="24.0" bottom="20.0" left="24.0"/>
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="12.0">
+        <VBox HBox.hgrow="ALWAYS" spacing="4.0">
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <Label text="Pertemuan 10: Input Data ke Database" styleClass="title-large"/>
+                <Label text="Semester 3" styleClass="badge-tag"/>
+                <Label text="Swing + JDBC" styleClass="badge-active"/>
+            </HBox>
+            <Label text="Panel JavaFX untuk membuka form Swing dan melihat data yang tersimpan di MariaDB."
+                   styleClass="subtitle"/>
+        </VBox>
+        <Button text="🧹 Tutup Semua Swing" onAction="#handleTutupSemuaSwing" styleClass="btn, btn-secondary"/>
+    </HBox>
+
+    <HBox spacing="12.0">
+        <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card" HBox.hgrow="ALWAYS">
+            <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                <Label text="Form Anggota" styleClass="title-medium"/>
+                <Label text="Praktikum: input ke tabel anggota." styleClass="subtitle" wrapText="true"/>
+            </VBox>
+            <Button text="🚀 Buka Form Anggota" onAction="#handleBukaFormAnggota"
+                    styleClass="btn, btn-primary" minWidth="185.0"/>
+        </HBox>
+        <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card" HBox.hgrow="ALWAYS">
+            <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                <Label text="Form Buku" styleClass="title-medium"/>
+                <Label text="Tugas mandiri: input ke tabel buku." styleClass="subtitle" wrapText="true"/>
+            </VBox>
+            <Button text="🚀 Buka Form Buku" onAction="#handleBukaFormBuku"
+                    styleClass="btn, btn-primary" minWidth="185.0"/>
+        </HBox>
+    </HBox>
+
+    <VBox spacing="10.0" styleClass="card" VBox.vgrow="ALWAYS">
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label text="🗄️ Data Tersimpan" styleClass="title-medium"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblJumlahAktif" text="0 jendela aktif" styleClass="badge-tag"/>
+            <Button text="🔄 Muat Ulang" onAction="#handleMuatUlang" styleClass="btn, btn-secondary"/>
+        </HBox>
+        <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+            <Tab text="Anggota">
+                <TableView fx:id="tblAnggota"/>
+            </Tab>
+            <Tab text="Buku">
+                <TableView fx:id="tblBuku"/>
+            </Tab>
+        </TabPane>
+        <Label fx:id="lblStatusMessage" text="Memuat data..." styleClass="subtitle" wrapText="true"/>
+    </VBox>
+</VBox>

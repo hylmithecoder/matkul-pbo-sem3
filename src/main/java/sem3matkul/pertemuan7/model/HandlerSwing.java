@@ -78,7 +78,7 @@ public class HandlerSwing {
         return activeFrames.size();
     }
 
-    private void bukaAtauFokus(String key, String label, Supplier<JFrame> frameSupplier) {
+    public void bukaAtauFokus(String key, String label, Supplier<JFrame> frameSupplier) {
         SwingUtilities.invokeLater(() -> {
             initLookAndFeel();
 

@@ -73,6 +73,16 @@ public class DashboardController {
     }
 
     @FXML
+    private void handleBukaPertemuan10() {
+        WindowManager.openWindow(
+                "/sem3matkul/pertemuan10/input_data.fxml",
+                "Pertemuan 10 - Input Data ke Database",
+                1020,
+                680
+        );
+    }
+
+    @FXML
     private void handleKeluar() {
         Platform.exit();
         System.exit(0);
