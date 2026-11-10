@@ -1,0 +1,26 @@
+CREATE TABLE IF NOT EXISTS tbl_user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    otoritas VARCHAR(20) NOT NULL,
+    no_hp VARCHAR(13)
+);
+
+CREATE TABLE IF NOT EXISTS tbl_member (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    mobil VARCHAR(50) NOT NULL,
+    plat_nomor VARCHAR(15) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS tbl_transaksi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    no_tiket VARCHAR(30) NOT NULL UNIQUE,
+    plat_no VARCHAR(15) NOT NULL,
+    mobil VARCHAR(50) NOT NULL,
+    masuk_parkir DATETIME NOT NULL,
+    keluar_parkir DATETIME NULL,
+    id_member INT NULL,
+    FOREIGN KEY (id_member) REFERENCES tbl_member(id) ON DELETE SET NULL
+);

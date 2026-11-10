@@ -30,8 +30,8 @@ public class Database {
         String dbPort = getEnvOrDefault(dotenv, "DB_PORT", "3306");
         String dbName = getEnvOrDefault(dotenv, "DB_NAME", "perpustakaan");
 
-        user = getEnvOrDefault(dotenv, "DB_USER", "hylmi");
-        pass = getEnvOrDefault(dotenv, "DB_PASS", "ohmypc");
+        user = getEnvOrDefault(dotenv, "DB_USER", "root");
+        pass = getEnvOrDefault(dotenv, "DB_PASS", "");
 
         String customUrl = getEnvOrDefault(dotenv, "DB_URL", null);
         if (customUrl != null && !customUrl.isBlank()) {

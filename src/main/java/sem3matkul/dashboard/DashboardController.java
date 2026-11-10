@@ -83,6 +83,16 @@ public class DashboardController {
     }
 
     @FXML
+    private void handleBukaPertemuan11() {
+        WindowManager.openWindow(
+                "/sem3matkul/pertemuan11/dashboard_parking.fxml",
+                "Pertemuan 11 - Sistem Parkir Sederhana",
+                1020,
+                680
+        );
+    }
+
+    @FXML
     private void handleKeluar() {
         Platform.exit();
         System.exit(0);

@@ -116,6 +116,17 @@
                     </VBox>
                     <Button text="🚀 Buka Window" onAction="#handleBukaPertemuan10" styleClass="btn, btn-primary"/>
                 </HBox>
+
+                <HBox spacing="16.0" alignment="CENTER_LEFT" styleClass="meeting-card">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="Pertemuan 11: Sistem Parkir Sederhana" styleClass="title-medium"/>
+                            <Label text="Aktif" styleClass="badge-active"/>
+                        </HBox>
+                        <Label text="Materi: CRUD User, Member, dan Transaksi parkir dengan form Swing dan database MariaDB." styleClass="subtitle"/>
+                    </VBox>
+                    <Button text="🚀 Buka Window" onAction="#handleBukaPertemuan11" styleClass="btn, btn-primary"/>
+                </HBox>
             </VBox>
         </ScrollPane>
     </VBox>

@@ -54,6 +54,7 @@ public class InputDataController {
     private static <T, V> TableColumn<T, V> kolom(String judul, Function<T, V> nilai) {
         TableColumn<T, V> kolom = new TableColumn<>(judul);
         kolom.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(nilai.apply(c.getValue())));
+        System.out.println(kolom);
         return kolom;
     }
 
